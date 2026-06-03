@@ -1,6 +1,7 @@
 import re
 from fastapi import FastAPI, Response, Request
 from weasyprint import HTML
+from bcv import obtener_tasa_y_fecha
 
 app = FastAPI()
 
