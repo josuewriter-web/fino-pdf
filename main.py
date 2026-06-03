@@ -23,6 +23,8 @@ async def convertir_pdf(request: Request):
     return Response(content=pdf_bytes, media_type="application/pdf")
 
 # --- PORTAL 2: BUSCAR TASA BCV ---
+from bcv import obtener_tasa_y_fecha
+
 @app.get("/bcv")
-def bcv_endpoint():
+def api_bcv():
     return obtener_tasa_y_fecha()
