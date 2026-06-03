@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Response, Request
-from weasyprint import HTML, FontConfiguration
+from weasyprint import HTML
 
 app = FastAPI()
 
@@ -7,8 +7,6 @@ app = FastAPI()
 async def convertir_pdf(request: Request):
     body = await request.body()
     html_text = body.decode("utf-8")
-    
-    font_config = FontConfiguration()
     
     fuente_emojis = """
     <style>
@@ -23,5 +21,6 @@ async def convertir_pdf(request: Request):
     """
     html_final = fuente_emojis + html_text
     
-    pdf_bytes = HTML(string=html_final, base_url=".").write_pdf(font_config=font_config)
+    # Quitamos lo complicado, WeasyPrint buscará el archivo solo con el punto
+    pdf_bytes = HTML(string=html_final, base_url=".").write_pdf()
     return Response(content=pdf_bytes, media_type="application/pdf")
