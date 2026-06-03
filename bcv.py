@@ -1,33 +1,38 @@
 import requests
 from bs4 import BeautifulSoup
-import re
 from datetime import datetime, timezone, timedelta
 
 def obtener_tasa_y_fecha():
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
     try:
-        # Entramos a la nueva página
         url = "https://alcambio.app"
         response = requests.get(url, headers=headers, timeout=10)
         soup = BeautifulSoup(response.text, "html.parser")
         
-        # Guardamos todo el texto de la página en minúsculas
-        texto_pagina = soup.get_text().lower()
         tasa_hoy = "0"
         
-        # Buscamos la palabra "bcv" y el primer número con decimales que aparezca después
-        match = re.search(r'bcv.*?(\d+[\.,]\d+)', texto_pagina, re.DOTALL)
-        if match:
-            tasa_hoy = match.group(1).replace(",", ".")
-        else:
-            # Si cambia el diseño, agarramos el primer número decimal que encontremos
-            todos_los_numeros = re.findall(r'\d+[\.,]\d+', texto_pagina)
+        # 1. Buscamos el contenedor específico del BCV en la interfaz de AlCambio
+        # Generalmente usan tarjetas o secciones que asocian el texto "BCV" con el precio
+        for contenedor in soup.find_all(["div", "tr", "p"]):
+            texto = contenedor.get_text().upper()
+            if "BCV" in texto:
+                # Extraemos los números con decimales que estén en ese mismo bloque
+                import re
+                numeros = re.findall(r'\d+[\.,]\d+', texto)
+                if numeros:
+                    tasa_hoy = numeros[0].replace(",", ".")
+                    break
+        
+        # Fallback: Si el diseño cambia un poco, extrae el primer decimal grande de la página
+        if tasa_hoy == "0":
+            import re
+            todos_los_numeros = re.findall(r'\d+[\.,]\d+', soup.get_text())
             if todos_los_numeros:
                 tasa_hoy = todos_los_numeros[0].replace(",", ".")
-        
-        # Como la página tiene la tasa de hoy, usamos la fecha actual de Venezuela
+
+        # 2. Fecha local de Venezuela garantizada para tu reporte Fino
         zona_bcv = timezone(timedelta(hours=-4))
         hoy = datetime.now(zona_bcv)
         
@@ -37,5 +42,6 @@ def obtener_tasa_y_fecha():
         fecha_bonita = f"{dias[hoy.weekday()]}, {hoy.strftime('%d')} {meses[hoy.month - 1]} {hoy.year}"
         
         return {"tasa": tasa_hoy, "fecha": fecha_bonita}
-    except:
-        return {"tasa": "0", "fecha": "Error"}
+        
+    except Exception as e:
+        return {"tasa": "0", "fecha": f"Error: {str(e)}"}
