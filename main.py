@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'MisEmojis';
+    src: url('NotoColorEmoji.ttf');
+}
+
+body {
+    font-family: 'Arial', 'MisEmojis', sans-serif;
+}
 from fastapi import FastAPI, Response, Request
 from weasyprint import HTML
 
