@@ -1,3 +1,5 @@
 fastapi
 uvicorn
 weasyprint
+requests
+beautifulsoup4
