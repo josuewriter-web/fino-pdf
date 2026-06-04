@@ -162,4 +162,31 @@ def procesar_datos(json_bot1):
     comportamiento_temporal = {}
     for b, v in bloques_horarios.items():
         prod_ordenados = dict(sorted(v["productos"].items(), key=lambda x: x[1], reverse=True))
-        prod_limpios = {p: round(c, 2) for p, c in prod
+        prod_limpios = {p: round(c, 2) for p, c in prod_ordenados.items()}
+        comportamiento_temporal[b] = {
+            "facturas": len(v["clientes"]),
+            "monto_total_usd": round(v["monto"], 2),
+            "productos_vendidos": prod_limpios
+        }
+
+    # Convertir el inventario a USD
+    inventario_usd = []
+    for item in inventario:
+        nuevo_item = item.copy()
+        nuevo_item['precio_venta_usd'] = round(float(item['precio_venta_usd']) / tasa_bcv, 2)
+        nuevo_item['costo_unidad_usd'] = round(float(item['costo_unidad_usd']) / tasa_bcv, 2)
+        inventario_usd.append(nuevo_item)
+
+    # 8. Unir todo en el JSON de salida
+    json_final = {
+        "informacion_sistema": info_sistema,
+        "kpis_globales": kpis_globales,
+        "tabla_categorias": lista_categorias,
+        "tabla_mix_productos": lista_mix_productos,
+        "top_10_mas_vendidos": top_10_mas_vendidos,
+        "top_10_mas_rentables": top_10_mas_rentables,
+        "comportamiento_temporal": comportamiento_temporal,
+        "inventario_crudo_actual": inventario_usd
+    }
+
+    return json.dumps(json_final, indent=2, ensure_ascii=False)
