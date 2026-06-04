@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Plantilla Fino Móvil</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght=700&display=swap');
+
+        @page { 
+            size: 108mm 192mm; 
+            margin: 8mm; 
+            background-color: #f8fafc; 
+            @bottom-left { 
+                content: "fino"; 
+                font-family: 'Poppins', sans-serif; 
+                font-weight: 700; 
+                font-size: 9pt; 
+                color: rgba(100, 116, 139, 0.35); 
+            }
+            @bottom-right { 
+                content: "Pág " counter(page) "/" counter(pages); 
+                font-family: Arial, sans-serif; 
+                font-size: 8pt; 
+                color: #64748b; 
+            }
+        }
+        
+        *, *::before, *::after { box-sizing: border-box; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f8fafc; color: #1e293b; line-height: 1.3; }
+
+        .section-dashboard { page-break-after: always; page: page-dashboard; }
+        .section-actions { page-break-after: always; page: page-actions; }
+        .section-evolution { page: page-evolution; }
+        
+        .header-premium { margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #0f172a; }
+        .header-top-row { display: block; width: 100%; margin-bottom: 4px; }
+        .header-cell-left { display: block; text-align: left; margin-bottom: 2px; }
+        .header-cell-right { display: block; text-align: left; }
+        h1 { font-size: 16pt; font-weight: 800; color: #0f172a; margin: 0; text-transform: uppercase; letter-spacing: -0.5px; line-height: 1.1; }
+        .business-name { font-size: 10pt; font-weight: 700; color: #64748b; text-transform: uppercase; }
+        .header-date { font-size: 8.5pt; font-weight: 500; color: #94a3b8; }
+        
+        h2 { font-size: 11.5pt; color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px; margin-top: 16px; margin-bottom: 10px; text-transform: uppercase; page-break-after: avoid; }
+        .highlight { font-weight: 600; color: #0f172a; }
+
+        .kpi-row { display: block; width: 100%; margin-bottom: 12px; }
+        .kpi-card { display: inline-block; width: 48%; background: #ffffff; padding: 10px 6px; border-radius: 6px; border: 1px solid #e2e8f0; text-align: center; vertical-align: top; margin-bottom: 8px; }
+        .kpi-card:nth-child(odd) { margin-right: 2%; }
+        .kpi-value { font-size: 13pt; font-weight: 700; color: #0f172a; margin: 2px 0; }
+        .kpi-label { font-size: 7pt; color: #64748b; font-weight: 600; text-transform: uppercase; }
+        .kpi-status { display: inline-block; font-size: 7pt; font-weight: 600; padding: 1px 4px; border-radius: 4px; margin-top: 2px; }
+        .status-green { background-color: #dcfce7; color: #15803d; }
+        .status-amber { background-color: #fef9c3; color: #a16207; }
+
+        .category-summary-container { background-color: #f1f5f9; border-radius: 8px; padding: 8px; margin-bottom: 12px; display: block; width: 100%; }
+        .category-block { display: inline-block; width: 48%; text-align: center; vertical-align: top; padding: 6px 0; }
+        .category-block:nth-child(1), .category-block:nth-child(3) { border-right: 1px solid #cbd5e1; }
+        .category-block:nth-child(1), .category-block:nth-child(2) { border-bottom: 1px solid #cbd5e1; }
+        .category-label { font-size: 7.5pt; font-weight: 600; color: #64748b; text-transform: uppercase; margin-bottom: 2px; display: block; }
+        .category-value { font-size: 11pt; font-weight: 700; color: #0f172a; display: inline-block; }
+        .category-percentage { font-size: 8pt; font-weight: 600; margin-left: 2px; display: inline-block; }
+        .color-red { color: #ef4444; }
+        .color-blue { color: #2563eb; }
+        .color-gray { color: #64748b; }
+
+        .table-container { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px; overflow-x: hidden; }
+        .prod-table { width: 100%; border-collapse: collapse; }
+        .prod-table th { text-align: left; padding: 6px 4px; font-size: 7pt; color: #64748b; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; }
+        .prod-table td { padding: 6px 4px; border-bottom: 1px solid #f1f5f9; font-size: 8pt; vertical-align: middle; }
+        .prod-table tr:last-child td { border-bottom: none; }
+
+        .action-card-row { background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; padding: 10px; margin-bottom: 12px; width: 100%; page-break-inside: avoid; }
+        .row-red { border-left: 4px solid #ef4444; }
+        .row-amber { border-left: 4px solid #f59e0b; }
+        .row-green { border-left: 4px solid #16a34a; }
+        .card-header-flex { margin-bottom: 8px; display: block; }
+        .card-main-title { font-size: 10.5pt; font-weight: 700; color: #0f172a; display: block; margin: 4px 0 0 0; }
+        .card-blocks-container { display: block; width: 100%; }
+        .sub-block { display: block; width: 100% !important; margin-bottom: 6px; padding: 0 !important;}
+        .sub-block:last-child { margin-bottom: 0; }
+        
+        .box-problema, .box-solucion, .box-porque, .box-impacto { border-radius: 6px; padding: 8px; min-height: auto; }
+        .box-problema { background-color: #f8fafc; border: 1px solid #e2e8f0; }
+        .row-red .box-problema { background-color: #fef2f2; border: 1px solid #fee2e2; }
+        .row-amber .box-problema { background-color: #fffbeb; border: 1px solid #fef3c7; }
+        .box-solucion { background-color: #eff6ff; border: 1.5px dashed #2563eb; }
+        .box-porque { background-color: #f5f3ff; border: 1px solid #ddd6fe; }
+        .box-impacto { background-color: #f0fdf4; border: 1px solid #dcfce7; }
+        
+        .section-box-label { font-size: 7.5pt; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 3px; display: block; }
+        .box-solucion .section-box-label { color: #1e40af; }
+        .box-porque .section-box-label { color: #6d28d9; }
+        .box-impacto .section-box-label { color: #15803d; }
+        .section-box-text { font-size: 8.5pt; color: #334155; margin: 0; line-height: 1.35; }
+        .box-solucion .section-box-text { color: #1e3a8a; }
+        .box-porque .section-box-text { color: #4c1d95; }
+        .box-impacto .section-box-text { color: #14532d; }
+        .badge-status { font-weight: 700; border-radius: 4px; font-size: 7.5pt; display: inline-block; padding: 2px 6px; }
+        .badge-green { background-color: #dcfce7; color: #15803d; }
+
+        .evolution-desc-text { font-size: 9pt; color: #475569; line-height: 1.4; margin-top: -4px; margin-bottom: 12px; }
+        .evolution-wrapper { margin-top: 6px; }
+        .evo-card-linear { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; margin-bottom: 8px; width: 100%; display: block; page-break-inside: avoid; }
+        .evo-left-content { display: block; width: 100%; margin-bottom: 8px; }
+        .evo-right-meta { display: block; width: 100%; border-top: 1px solid #f1f5f9; padding-top: 6px; }
+        
+        .blur-heavy-1 { filter: blur(0.8px); opacity: 0.75; }
+        .blur-heavy-2 { filter: blur(1.2px); opacity: 0.65; }
+        .blur-heavy-3 { filter: blur(1.6px); opacity: 0.50; }
+        .blur-heavy-4 { filter: blur(2.0px); opacity: 0.35; }
+        
+        .lock-indicator { margin-right: 4px; font-size: 8.5pt; }
+        .evo-fase-label { font-size: 7pt; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+        .evo-title { font-size: 10pt; font-weight: 700; color: #0f172a; margin: 2px 0 4px 0; }
+        .evo-desc { font-size: 8.5pt; color: #475569; margin: 0; line-height: 1.35; }
+        .evo-bar-container { width: 100%; background-color: #f1f5f9; height: 5px; border-radius: 10px; overflow: hidden; margin-bottom: 4px; }
+        .evo-bar-fill { height: 100%; border-radius: 10px; }
+        .bg-success { background-color: #10b981; }
+        .bg-process { background-color: #3b82f6; }
+        .bg-locked { background-color: #cbd5e1; }
+        .evo-status-text { font-size: 7.5pt; font-weight: 700; text-transform: uppercase; display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="section-dashboard">
+        <div class="header-premium">
+            <div class="header-top-row">
+                <div class="header-cell-left">
+                    <div class="business-name">[Nombre del Negocio]</div>
+                </div>
+                <div class="header-cell-right">
+                    <div class="header-date">[Fecha del Reporte]</div>
+                </div>
+            </div>
+            <h1>Reporte de Inteligencia Comercial</h1>
+        </div>
+        
+        <div class="kpi-row">
+            <div class="kpi-card"><div class="kpi-label">Venta Total</div><div class="kpi-value">[Valor]</div><div class="kpi-status status-green">🟢 Estable</div></div>
+            <div class="kpi-card"><div class="kpi-label">Ganancia Real</div><div class="kpi-value">[Valor]</div><div class="kpi-status status-green">🟢 Margen Sano</div></div>
+            <div class="kpi-card"><div class="kpi-label">Ticket Promed.</div><div class="kpi-value">[Valor]</div><div class="kpi-status status-green">🟢 [Valor]</div></div>
+            <div class="kpi-card"><div class="kpi-label">Clientes</div><div class="kpi-value">[Valor]</div><div class="kpi-status status-amber"></div></div>
+        </div>
+
+        <h2>📊 Análisis de Ventas</h2>
+        <div class="category-summary-container">
+            <div class="category-block"><div class="category-label">[Categoría]</div><span class="category-value">[Monto]</span><span class="category-percentage">([%])</span></div>
+        </div>
+
+        <div class="table-container">
+            <table class="prod-table">
+                <thead><tr><th>Producto</th><th style="text-align: right;">Cant</th><th style="text-align: right;">Total</th><th style="text-align: right;">% Mix</th></tr></thead>
+                <tbody>
+                    <tr><td class="highlight">[Producto]</td><td style="text-align: right;">[Cantidad]</td><td style="text-align: right; font-weight: 600;">[Monto]</td><td style="text-align: right; font-weight: 600; color: #2563eb;">[%]</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="section-actions">
+        <h2>🚨 Alertas Inmediatas</h2>
+        
+        <div class="action-card-row row-red">
+            <div class="card-header-flex">
+                <span class="badge-status">[Crítico/Riesgo]</span>
+                <div class="card-main-title">[Título Alerta]</div>
+            </div>
+            <div class="card-blocks-container">
+                <div class="sub-block"><div class="box-problema"><span class="section-box-label">Situación</span><p class="section-box-text">[Texto]</p></div></div>
+                <div class="sub-block"><div class="box-solucion"><span class="section-box-label">👉 Acción Recomendada</span><p class="section-box-text">[Texto]</p></div></div>
+                <div class="sub-block"><div class="box-porque"><span class="section-box-label">🧠 Por Qué Funciona</span><p class="section-box-text">[Texto]</p></div></div>
+                <div class="sub-block"><div class="box-impacto"><span class="section-box-label">🎯 Impacto Estimado</span><p class="section-box-text">[Texto]</p></div></div>
+            </div>
+        </div>
+
+        <h2>📈 Optimización</h2>
+        <div class="action-card-row row-green">
+            <div class="card-header-flex">
+                <span class="badge-status badge-green">Logro</span>
+                <div class="card-main-title">[Título Logro]</div>
+            </div>
+            <div class="card-blocks-container">
+                <div class="sub-block">
+                    <div class="box-problema" style="background-color: #ffffff; border: 1px solid #e2e8f0; margin-bottom: 6px;">
+                        <span class="section-box-label" style="color: #166534;">[Subtítulo]</span>
+                        <p class="section-box-text" style="margin-bottom: 6px;">[Texto]</p>
+                        <div class="box-solucion" style="background-color: #f0fdf4; border-color: #16a34a; padding: 6px;">
+                            <p class="section-box-text" style="color: #14532d;"><b>Estrategia:</b> [Texto]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-evolution">
+        <h2>🚀 Evolución Inteligente</h2>
+        <p class="evolution-desc-text">A medida que acumula información, tu sistema Fino desbloquea módulos avanzados de control, estrategia y predicción.</p>
+        
+        <div class="evolution-wrapper">
+            <div class="evo-card-linear"><div class="evo-left-content"><div class="evo-fase-label">Fase 01</div><div class="evo-title">Auditoría Diaria</div><p class="evo-desc">Auditoría de ventas del día y alertas de vacíos.</p></div><div class="evo-right-meta"><div class="evo-bar-container"><div class="evo-bar-fill bg-success" style="width: 100%;"></div></div><span class="evo-status-text" style="color: #059669;">Activa (100%)</span></div></div>
+            <div class="evo-card-linear"><div class="evo-left-content"><div class="evo-fase-label">Fase 02</div><div class="evo-title">Ritmo Semanal</div><p class="evo-desc">Mapeo de productos estrella semanales.</p></div><div class="evo-right-meta"><div class="evo-bar-container"><div class="evo-bar-fill bg-process" style="width: 35%;"></div></div><span class="evo-status-text" style="color: #2563eb;">Proceso (35%)</span></div></div>
+            <div class="evo-card-linear locked-stage"><div class="evo-left-content blur-heavy-1"><div class="evo-fase-label">Fase 03</div><div class="evo-title">Creador de Combos</div><p class="evo-desc">Descubridor de ofertas cruzadas.</p></div><div class="evo-right-meta"><span class="evo-status-text" style="color: #64748b;"><span class="lock-indicator">🔒</span>Bloqueado (Día 14)</span></div></div>
+            <div class="evo-card-linear locked-stage"><div class="evo-left-content blur-heavy-2"><div class="evo-fase-label">Fase 04</div><div class="evo-title">Capital Atrapado</div><p class="evo-desc">Detector de mercancía estancada.</p></div><div class="evo-right-meta"><span class="evo-status-text" style="color: #64748b;"><span class="lock-indicator">🔒</span>Bloqueado (Día 30)</span></div></div>
+            <div class="evo-card-linear locked-stage"><div class="evo-left-content blur-heavy-3"><div class="evo-fase-label">Fase 05</div><div class="evo-title">Predicción Demanda</div><p class="evo-desc">Simulador para compras anticipadas.</p></div><div class="evo-right-meta"><span class="evo-status-text" style="color: #cbd5e1;"><span class="lock-indicator">🔒</span>Bloqueado (Día 60)</span></div></div>
+            <div class="evo-card-linear locked-stage"><div class="evo-left-content blur-heavy-4"><div class="evo-fase-label">Fase 06</div><div class="evo-title">Cerebro de Clientes</div><p class="evo-desc">Estudio predictivo de fidelidad.</p></div><div class="evo-right-meta"><span class="evo-status-text" style="color: #e2e8f0;"><span class="lock-indicator">🔒</span>Bloqueado (Día 90)</span></div></div>
+        </div>
+    </div>
+</body>
+</html>
