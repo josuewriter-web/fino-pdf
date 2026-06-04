@@ -2,15 +2,16 @@ import requests
 from datetime import datetime, timezone, timedelta
 
 def obtener_tasa_y_fecha():
-    tasa_hoy = "0"
+    tasa_hoy = "0.00"
     
-    # Usamos la base de datos pública que sí funcionó
     try:
         url = "https://ve.dolarapi.com/v1/dolares/oficial"
         respuesta = requests.get(url, timeout=10).json()
-        tasa_hoy = str(respuesta["promedio"]).replace(",", ".")
+        # Convierte a número y lo deja con solo 2 decimales
+        valor = float(respuesta["promedio"])
+        tasa_hoy = f"{valor:.2f}"
     except:
-        tasa_hoy = "0"
+        tasa_hoy = "0.00"
 
     # Creamos la fecha bonita
     zona_bcv = timezone(timedelta(hours=-4))
