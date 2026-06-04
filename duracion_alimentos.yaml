@@ -1,5 +1,5 @@
 # Archivo: duracion_alimentos.yaml
-# Control de días máximos reales para un Minimarket venezolano
+# Control de días máximos aproximados para un Minimarket venezolano
 
 secciones:
   panaderia_y_pasteleria:
