@@ -1,7 +1,9 @@
 import re
+import json
 from fastapi import FastAPI, Response, Request
 from weasyprint import HTML
-from bcv import obtener_tasa_y_fecha  # Aquí llama a tu otro archivo
+from bcv import obtener_tasa_y_fecha
+from calculadora import procesar_datos
 
 app = FastAPI()
 
@@ -23,8 +25,14 @@ async def convertir_pdf(request: Request):
     return Response(content=pdf_bytes, media_type="application/pdf")
 
 # --- PORTAL 2: BUSCAR TASA BCV ---
-from bcv import obtener_tasa_y_fecha
-
 @app.get("/bcv")
 def api_bcv():
     return obtener_tasa_y_fecha()
+
+# --- PORTAL 3: CALCULADORA ---
+@app.post("/calcular")
+async def calcular(request: Request):
+    datos_recibidos = await request.json()
+    string_json = json.dumps(datos_recibidos)
+    resultado_string = procesar_datos(string_json)
+    return json.loads(resultado_string)
