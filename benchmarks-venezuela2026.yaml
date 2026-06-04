@@ -1,0 +1,81 @@
+# BENCHMARKS Y CONTEXTO DE RETAIL VENEZUELA (2026)
+# Este archivo sirve como base de conocimiento para auditorias inteligentes.
+
+CONTEXTO_MERCADO_VENEZUELA:
+  situacion_general: "Consumo debil, dolarizacion y capital limitado. Reposicion variable."
+  comportamiento_compra: "Muchas compras son pequenas pero muy frecuentes."
+  ticket_promedio_normal: "Entre $3.00 y $6.00 USD es el estandar normal diario. No es una crisis, pero es la metrica clave para evaluar el crecimiento de la tienda."
+  prioridad_negocio: "Rotar rapido, recuperar caja de inmediato y evitar dinero atrapado en estanteria."
+
+METRICAS_CORE_PRODUCTOS:
+  margen_bruto:
+    malo: "<20%"
+    normal: "25% - 35%"
+    bueno: "35% - 50%+"
+    objetivo_sano: "25% - 40%"
+  margen_neto:
+    malo: "<3%"
+    normal: "5% - 10%"
+    bueno: "10% - 20%"
+    objetivo_sano: "5% - 15%"
+
+CONTROL_INVENTARIO:
+  rotacion_anual_turnover:
+    malo: "<6x"
+    normal: "8x - 12x"
+    bueno: "12x - 14x+"
+    objetivo_sano: "8x - 14x"
+  dias_de_inventario:
+    malo: ">60 dias"
+    normal: "25 - 45 dias"
+    bueno: "<25 dias"
+    objetivo_sano: "25 - 45 dias"
+  dead_stock_capital_inactivo:
+    malo: ">20%"
+    normal: "10% - 15%"
+    bueno: "<10%"
+    objetivo_sano: "<10% - 15%"
+
+DISPONIBILIDAD_Y_STOCKOUT:
+  tasa_escasez_stockout_rate:
+    malo: ">12%"
+    normal: "5% - 10%"
+    bueno: "<5%"
+    objetivo_sano: "<8%"
+    nota_venezuela: "Algo de stockout es normal, pero demasiado mata las ventas recurrentes."
+  tasa_servicio_fill_rate:
+    malo: "<90%"
+    normal: "92% - 95%"
+    bueno: "97%+"
+
+RENTABILIDAD_Y_MERMA:
+  gmroi_retorno_inversion_inventario:
+    malo: "<1.5"
+    normal: "2 - 3"
+    bueno: "3+"
+    objetivo_sano: "2+"
+    significado: "Cuanto margen produce el negocio por cada dolar invertido en inventario."
+  perdidas_shrinkage_total:
+    malo: ">5%"
+    normal: "2% - 4%"
+    bueno: "<2%"
+    objetivo_sano: "<3%"
+    causas_principales: "Vencimiento, calor, fallas de refrigeracion, errores manuales, robo interno."
+  mermas_y_vencimientos:
+    malo: ">8%"
+    normal: "3% - 5%"
+    bueno: "<2%"
+
+OPERACIONES_Y_SKUS:
+  costo_laboral:
+    malo: ">22%"
+    normal: "10% - 18%"
+    bueno: "<15%"
+  tiempo_espera_cola:
+    malo: ">10 min"
+    normal: "5 - 8 min"
+    bueno: "<5 min"
+  ley_del_mix_sku:
+    concentracion: "El 20% de los productos (SKUs) generan entre el 70% y 85% de las ventas totales."
+    productos_fast_movers: "Deben rotar semanalmente."
+    productos_premium: "Tienen alto margen pero baja rotacion."
