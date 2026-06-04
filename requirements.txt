@@ -3,3 +3,5 @@ uvicorn
 weasyprint
 requests
 beautifulsoup4
+Flask
+gunicorn
