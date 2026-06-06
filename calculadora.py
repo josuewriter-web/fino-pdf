@@ -112,7 +112,7 @@ def procesar_datos(json_bot1):
     # 5. Construir Tabla de Categorías (Ordenada de mayor a menor venta)
     lista_categorias = []
     for c, v in por_categoria.items():
-        part_porc = (v["ganancia_usd"] / ganancia_usd * 100) if ganancia_usd > 0 else 0.0
+        part_porc = (v["ventas_usd"] / venta_total_dia * 100) if venta_total_dia > 0 else 0.0
         lista_categorias.append({
             "categoria": c,
             "ventas_totales_usd": round(v["ventas_usd"], 2),
