@@ -1,5 +1,5 @@
-# BENCHMARKS Y CONTEXTO DE RETAIL VENEZUELA (2026)
-# Este archivo sirve como base de conocimiento para auditorias inteligentes.
+# BENCHMARKS Y CONTEXTO DE RETAIL VENEZUELA (ACTUALIZADO 2026)
+# Clasificado por tamano (Micro, Pequeno, Mediano, Grande)
 
 CONTEXTO_MERCADO_VENEZUELA:
   situacion_general: "Consumo debil, dolarizacion y capital limitado. Reposicion variable."
@@ -7,41 +7,83 @@ CONTEXTO_MERCADO_VENEZUELA:
   ticket_promedio_normal: "Entre $3.00 y $6.00 USD es el estandar normal diario. No es una crisis, pero es la metrica clave para evaluar el crecimiento de la tienda."
   prioridad_negocio: "Rotar rapido, recuperar caja de inmediato y evitar dinero atrapado en estanteria."
 
+CLASIFICACION_NEGOCIO:
+  micro: "100-500 SKUs | 1-3 empleados | 20-80 tickets/dia (Ej: abasto de barrio, tienda de viveres pequena)"
+  pequeno: "500-1.500 SKUs | 3-8 empleados | 80-250 tickets/dia (Ej: minimercado, bodegon pequeno)"
+  mediano: "1.500-4.000 SKUs | 8-20 empleados | 250-700 tickets/dia (Ej: minimercado consolidado, bodegon importante)"
+  grande: "4.000+ SKUs | 20+ empleados | 700+ tickets/dia (Ej: supermercado pequeno, cadena local)"
+
 METRICAS_CORE_PRODUCTOS:
-  margen_bruto:
-    malo: "<20%"
-    normal: "25% - 35%"
-    bueno: "35% - 50%+"
-    objetivo_sano: "25% - 40%"
-  margen_neto:
-    malo: "<3%"
-    normal: "5% - 10%"
-    bueno: "10% - 20%"
-    objetivo_sano: "5% - 15%"
+  margen_bruto_normal:
+    micro: "30% - 45%"
+    pequeno: "28% - 40%"
+    mediano: "25% - 35%"
+    grande: "20% - 30%"
+  margen_neto_bueno:
+    micro: "8% - 15%"
+    pequeno: "6% - 12%"
+    mediano: "5% - 10%"
+    grande: "3% - 8%"
 
 CONTROL_INVENTARIO:
   rotacion_anual_turnover:
-    malo: "<6x"
-    normal: "8x - 12x"
-    bueno: "12x - 14x+"
-    objetivo_sano: "8x - 14x"
+    micro:
+      malo: "<8x"
+      normal: "10x - 15x"
+      bueno: "15x+"
+    pequeno:
+      malo: "<7x"
+      normal: "9x - 13x"
+      bueno: "13x+"
+    mediano:
+      malo: "<6x"
+      normal: "8x - 12x"
+      bueno: "12x+"
+    grande:
+      malo: "<5x"
+      normal: "7x - 10x"
+      bueno: "10x+"
   dias_de_inventario:
-    malo: ">60 dias"
-    normal: "25 - 45 dias"
-    bueno: "<25 dias"
-    objetivo_sano: "25 - 45 dias"
+    micro:
+      bueno: "<20 dias"
+      normal: "20 - 35 dias"
+      malo: ">50 dias"
+    pequeno:
+      bueno: "<25 dias"
+      normal: "25 - 40 dias"
+      malo: ">60 dias"
+    mediano:
+      bueno: "<30 dias"
+      normal: "30 - 45 dias"
+      malo: ">70 dias"
+    grande:
+      bueno: "<35 dias"
+      normal: "35 - 55 dias"
+      malo: ">80 dias"
   dead_stock_capital_inactivo:
-    malo: ">20%"
-    normal: "10% - 15%"
-    bueno: "<10%"
-    objetivo_sano: "<10% - 15%"
+    micro:
+      bueno: "<5%"
+      normal: "5% - 10%"
+      malo: ">15%"
+    pequeno:
+      bueno: "<8%"
+      normal: "8% - 12%"
+      malo: ">18%"
+    mediano:
+      bueno: "<10%"
+      normal: "10% - 15%"
+      malo: ">20%"
+    grande:
+      bueno: "<12%"
+      normal: "12% - 18%"
+      malo: ">25%"
 
 DISPONIBILIDAD_Y_STOCKOUT:
-  tasa_escasez_stockout_rate:
-    malo: ">12%"
-    normal: "5% - 10%"
-    bueno: "<5%"
-    objetivo_sano: "<8%"
+  tasa_escasez_stockout_rate_bueno:
+    micro: "<5%"
+    pequeno: "<6%"
+    mediano: "<8%"
+    grande: "<10%"
     nota_venezuela: "Algo de stockout es normal, pero demasiado mata las ventas recurrentes."
   tasa_servicio_fill_rate:
     malo: "<90%"
@@ -49,24 +91,21 @@ DISPONIBILIDAD_Y_STOCKOUT:
     bueno: "97%+"
 
 RENTABILIDAD_Y_MERMA:
-  gmroi_retorno_inversion_inventario:
-    malo: "<1.5"
-    normal: "2 - 3"
-    bueno: "3+"
-    objetivo_sano: "2+"
+  gmroi_retorno_inversion_inventario_bueno:
+    micro: "3+"
+    pequeno: "2.5+"
+    mediano: "2+"
+    grande: "1.8+"
     significado: "Cuanto margen produce el negocio por cada dolar invertido en inventario."
-  perdidas_shrinkage_total:
-    malo: ">5%"
-    normal: "2% - 4%"
-    bueno: "<2%"
-    objetivo_sano: "<3%"
+  perdidas_shrinkage_bueno:
+    micro: "<2%"
+    pequeno: "<2.5%"
+    mediano: "<3%"
+    grande: "<4%"
     causas_principales: "Vencimiento, calor, fallas de refrigeracion, errores manuales, robo interno."
-  mermas_y_vencimientos:
-    malo: ">8%"
-    normal: "3% - 5%"
-    bueno: "<2%"
 
 OPERACIONES_Y_SKUS:
+  regla_estrategica: "A medida que aumenta el tamano: baja el margen, baja el turnover, sube el dead stock, suben los dias de inventario y aumenta la complejidad operativa."
   costo_laboral:
     malo: ">22%"
     normal: "10% - 18%"
