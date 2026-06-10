@@ -68,8 +68,28 @@ secciones:
 
   industrial_estable:
     helados_industriales:
-      dias_maximos: 365
+      dias_maximos: 180
       palabras_clave: [helado efe, helado tio rico, tina de helado, paleta]
     larga_duracion:
       dias_maximos: 120
       palabras_clave: [harina, arroz, aceite, refresco, malta, pasta, chucheria]
+
+  papeleria:
+    utiles_y_papel:
+      dias_maximos: 180
+      palabras_clave: [hojas de papel, papel celofan, marcadores, lapices, borradores, sacapuntas, cuadernos escolares, ligas, cinta adhesiva]
+
+  hogar:
+    articulos_del_hogar:
+      dias_maximos: 180
+      palabras_clave: [servilletas, rollo de papel de cocina, papel aluminio, vasos, tasas, ganchos de ropa, pinzas de ropa]
+
+  tecnologia:
+    accesorios_telefonicos:
+      dias_maximos: 180
+      palabras_clave: [audifonos, cargador de telefono]
+
+  variedades:
+    varios_y_otros:
+      dias_maximos: 180
+      palabras_clave: [cigarrillos, fosforos, chimo, velas, juguetes, pulseras, collares, gorras]
