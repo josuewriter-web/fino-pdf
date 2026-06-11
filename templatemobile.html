@@ -4,25 +4,24 @@
     <meta charset="UTF-8">
     <title>Plantilla Fino Móvil</title>
     <style>
-        /* EL IMPORT DEBE IR AQUÍ: En la línea 1 del CSS */
+
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap');
 
-        /* Configuración de página exclusiva para la portada */
         @page page-cover {
-            size: 108mm 192mm; /* Mantiene el tamaño móvil */
-            margin: 0; /* Eliminamos márgenes para un diseño Full Black */
+            size: 108mm 192mm;
+            margin: 0;
             background-color: #000000; 
-            @bottom-left { content: none; } /* Quita el pie de página en la portada */
+            @bottom-left { content: none; }
             @bottom-right { content: none; }
             counter-reset: page 0;
         }
 
         .section-cover {
             page: page-cover;
-            page-break-after: always; /* Obliga a que el dashboard empiece en la pág 2 */
+            page-break-after: always;
             height: 192mm;
             box-sizing: border-box;
-            padding: 60mm 12mm 20mm 12mm; /* Controla la altura del contenido */
+            padding: 60mm 12mm 20mm 12mm;
             text-align: center;
             background-color: #000000;
         }
@@ -34,7 +33,7 @@
             color: #ffffff;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-top: 40mm; /* Espacio entre el logo y el título */
+            margin-top: 40mm;
             margin-bottom: 6px;
             line-height: 1.2;
         }
@@ -42,7 +41,7 @@
         .cover-business {
             font-size: 10pt;
             font-weight: 700;
-            color: #94a3b8; /* Gris elegante */
+            color: #94a3b8;
             text-transform: uppercase;
             margin-bottom: 4px;
         }
