@@ -112,8 +112,8 @@ def procesar_datos(json_bot1):
         "ticket_promedio_usd": round(ticket_promedio, 2),
         "total_clientes": cant_clientes,
         "total_facturas": total_facturas,
-        "articulos_por_factura": round(articulos_por_factura, 2)
-        "articulos_por_cliente": round(articulos_por_cliente, 2)
+        "articulos_por_factura": round(articulos_por_factura, 2),
+        "articulos_por_cliente": round(articulos_por_cliente, 2),
     }
 
     # 5. Construir Tabla de Categorías
