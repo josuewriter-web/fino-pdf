@@ -103,6 +103,7 @@ def procesar_datos(json_bot1):
     total_facturas = len(compras_por_cliente)
     ticket_promedio = (venta_total_dia / total_facturas) if total_facturas > 0 else 0.0
     articulos_por_factura = (total_articulos / total_facturas) if total_facturas > 0 else 0.0
+    articulos_por_cliente = (total_articulos / cant_clientes) if cant_clientes > 0 else 0.0
 
     kpis_globales = {
         "venta_total_usd": round(venta_total_dia, 2),
@@ -112,6 +113,7 @@ def procesar_datos(json_bot1):
         "total_clientes": cant_clientes,
         "total_facturas": total_facturas,
         "articulos_por_factura": round(articulos_por_factura, 2)
+        "articulos_por_cliente": round(articulos_por_cliente, 2)
     }
 
     # 5. Construir Tabla de Categorías
