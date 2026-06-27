@@ -1,6 +1,5 @@
 import json
 from datetime import datetime
-from itertools import combinations
 
 def procesar_datos(json_bot1):
     # 1. Leer el JSON del Bot 1
@@ -175,56 +174,49 @@ def procesar_datos(json_bot1):
             "monto_total_usd": round(v["monto"], 2),
             "productos_vendidos": prod_limpios
         }
-        
-    # 8. NUEVO: Análisis de Patrones Frecuentes (Grupos de cualquier tamaño)
-    # Paso A: Ver qué se vendió al menos 2 veces hoy
-    conteo_individual = {}
-    for productos in compras_por_cliente.values():
-        for p in productos:
-            conteo_individual[p] = conteo_individual.get(p, 0) + 1
-            
-    items_frecuentes = {p for p, c in conteo_individual.items() if c >= 2}
 
-    # Paso B: Buscar patrones usando solo los productos frecuentes
-    conteo_patrones = {}
-    for productos in compras_por_cliente.values():
-        canasta = [p for p in productos if p in items_frecuentes]
-        canasta.sort() 
-        
-        if len(canasta) >= 2:
-            max_tamano = min(len(canasta), 4) # Busca grupos de hasta 4 cosas para no saturarse
-            for tamano in range(2, max_tamano + 1):
-                for combo in combinations(canasta, tamano):
-                    conteo_patrones[combo] = conteo_patrones.get(combo, 0) + 1
-
-    # Desempate por tamaño de grupo
-    patrones_ordenados = sorted(conteo_patrones.items(), key=lambda x: (x[1], len(x[0])), reverse=True)[:5]
-    
-    lista_productos_asociados = []
-    for combo, cantidad in patrones_ordenados:
-        lista_productos_asociados.append({
-            "combo": " + ".join(combo),
-            "veces_vendidos_juntos": cantidad
-        })
-
-    # Convertir el inventario a USD
+    # 8. Convertir el inventario a USD y calcular Análisis de Inventario
     inventario_usd = []
+    valor_costo_total = 0.0
+    valor_potencial_total = 0.0
+
     for item in inventario:
         nuevo_item = item.copy()
-        nuevo_item['precio_venta_usd'] = round(float(item['precio_venta_usd']) / tasa_bcv, 2)
-        nuevo_item['costo_unidad_usd'] = round(float(item['costo_unidad_usd']) / tasa_bcv, 2)
+        precio_usd = float(item['precio_venta_usd']) / tasa_bcv
+        costo_usd = float(item['costo_unidad_usd']) / tasa_bcv
+        
+        # Leemos la cantidad que hay en la tienda
+        existencia = float(item.get('existencia_actual', 0))
+        
+        nuevo_item['precio_venta_usd'] = round(precio_usd, 2)
+        nuevo_item['costo_unidad_usd'] = round(costo_usd, 2)
         inventario_usd.append(nuevo_item)
+
+        # Sumar el dinero acumulado
+        valor_costo_total += (existencia * costo_usd)
+        valor_potencial_total += (existencia * precio_usd)
+
+    # Calcular los márgenes totales
+    margen_dinero = valor_potencial_total - valor_costo_total
+    margen_porcentaje = (margen_dinero / valor_potencial_total * 100) if valor_potencial_total > 0 else 0.0
+
+    analisis_inventario = {
+        "valor_costo_total_usd": round(valor_costo_total, 2),
+        "valor_potencial_total_usd": round(valor_potencial_total, 2),
+        "ganancia_proyectada_usd": round(margen_dinero, 2),
+        "margen_proyectado_porcentaje": round(margen_porcentaje, 2)
+    }
 
     # 9. Unir todo en el JSON de salida
     json_final = {
         "informacion_sistema": info_sistema,
         "kpis_globales": kpis_globales,
+        "analisis_inventario": analisis_inventario,
         "tabla_categorias": lista_categorias,
         "tabla_mix_productos": lista_mix_productos,
         "top_20_mas_vendidos": top_20_mas_vendidos,
         "top_20_mas_rentables": top_20_mas_rentables,
         "comportamiento_temporal": comportamiento_temporal,
-        "productos_asociados": lista_productos_asociados, 
         "inventario_crudo_actual": inventario_usd
     }
 
