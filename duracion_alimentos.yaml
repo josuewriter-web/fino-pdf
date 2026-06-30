@@ -29,12 +29,27 @@ secciones:
     embutidos_en_barra_abiertos:
       dias_maximos: 7
       palabras_clave: [jamon espalda, fiambre, mortadela, jamon de pierna]
+    embutidos_sellados_vacio:
+      dias_maximos: 30
+      palabras_clave: [salchichas plumrose, salchichas paquete, tocineta empaque, jamon sellado al vacio]
+    embutidos_curados_madurados:
+      dias_maximos: 60
+      palabras_clave: [salami, pepperoni, chorizo español, jamon serrano, salchichon]
+    lacteos_frescos_criollos:
+      dias_maximos: 10
+      palabras_clave: [suero criollo, suero de leche, requeson, natilla]
     lacteos_nevera_cerrados:
       dias_maximos: 30
       palabras_clave: [yogurt, yogurt firme, crema de leche, nata]
+    margarinas_y_mantequillas:
+      dias_maximos: 90
+      palabras_clave: [margarina mavesa, margarina, mantequilla]
     leche_uht_estante:
       dias_maximos: 60
       palabras_clave: [leche liquida completa, leche uht]
+    leche_pasteurizada_nevera:
+      dias_maximos: 14
+      palabras_clave: [leche de carton nevera, leche pasteurizada]
     quesos_duros:
       dias_maximos: 30
       palabras_clave: [queso duro blanco, queso duro, queso de año]
@@ -43,12 +58,20 @@ secciones:
     carnes_frescas_refrigeradas:
       dias_maximos: 2
       palabras_clave: [carne molida, milanesa de pollo, bistec, cochino]
+    pescados_y_mariscos_frescos:
+      dias_maximos: 2
+      palabras_clave: [pescado fresco, filete de pescado, camarones]
     carnes_congeladas:
       dias_maximos: 180
       palabras_clave: [pollo entero frozen, carne congelada, cochino congelado]
     alimentos_congelados_listos:
       dias_maximos: 90
       palabras_clave: [tequeños, papas congeladas, nuggets, pizza congelada]
+
+  masas_frescas:
+    masas_listas_congeladas:
+      dias_maximos: 90
+      palabras_clave: [masa de pastelito, masa facil, plantilla para pastelito, masa de pizza]
 
   huevos:
     carton_de_huevos:
@@ -65,31 +88,26 @@ secciones:
     verduras_pesadas:
       dias_maximos: 15
       palabras_clave: [papa, cebolla, zanahoria]
+    frutas_firmes_resistentas:
+      dias_maximos: 30
+      palabras_clave: [manzana, manzana roja, manzana verde]
+    peras_refrigeradas:
+      dias_maximos: 14
+      palabras_clave: [pera, peras]
+    uvas_refrigeradas:
+      dias_maximos: 10
+      palabras_clave: [uvas, uva verde, uva morada]
+    auyama_entera:
+      dias_maximos: 45
+      palabras_clave: [auyama entera]
+    cocos_secos:
+      dias_maximos: 45
+      palabras_clave: [coco seco, coco entero]
 
   industrial_estable:
     helados_industriales:
       dias_maximos: 180
       palabras_clave: [helado efe, helado tio rico, tina de helado, paleta]
     larga_duracion:
-      dias_maximos: 120
+      dias_maximos: 180
       palabras_clave: [harina, arroz, aceite, refresco, malta, pasta, chucheria]
-
-  papeleria:
-    utiles_y_papel:
-      dias_maximos: 180
-      palabras_clave: [hojas de papel, papel celofan, marcadores, lapices, borradores, sacapuntas, cuadernos escolares, ligas, cinta adhesiva]
-
-  hogar:
-    articulos_del_hogar:
-      dias_maximos: 180
-      palabras_clave: [servilletas, rollo de papel de cocina, papel aluminio, vasos, tasas, ganchos de ropa, pinzas de ropa, fósforos]
-
-  tecnologia:
-    accesorios_telefonicos:
-      dias_maximos: 180
-      palabras_clave: [audifonos, cargador de telefono]
-
-  variedades:
-    varios_y_otros:
-      dias_maximos: 180
-      palabras_clave: [cigarrillos, chimo, velas, juguetes, pulseras, collares, gorras]
